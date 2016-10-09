@@ -1,0 +1,44 @@
+<ion-header favorite>
+	<ion-navbar favorite>
+		<ion-title>小组</ion-title>
+	</ion-navbar>
+
+</ion-header>
+<ion-content favorite style="backgound-color=#71777f;">
+
+	<ion-searchbar [(ngModel)]="myInput" placeholder="搜索电影" (click)="onInput(event)"></ion-searchbar>
+	<ion-slides pager [options]="mySlideOptions" style="height: 35%">
+		<ion-slide>
+			<img src="../images/bg1.png"></ion-slide>
+
+		<ion-slide>
+			<img src="../images/bg2.png"></ion-slide>
+
+		<ion-slide>
+			<img src="../images/bg3.png"></ion-slide>
+		<ion-slide>
+			<img src="../images/bg4.png"></ion-slide>
+		<ion-slide>
+			<img src="../images/bg5.png"></ion-slide>
+	</ion-slides>
+	<h4 class="title">豆瓣电影TOP250</h4>
+	<ion-list>
+		<ion-item *ngFor="let movie of items">
+			<ion-thumbnail item-left>
+				<img src="{{movie.images.small}}"></ion-thumbnail>
+			<h2>{{movie.title}}</h2>
+			<span>{{movie.genres}}</span>
+			<p>{{movie.year}}</p>
+			<span>评分{{movie.rating.average}}</span>
+			<button clear item-right (click)="onViewEnter(movie)">View</button>
+		</ion-item>
+	</ion-list>
+
+	<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+		<ion-infinite-scroll-content>
+			loadingSpinner="bubbles" loadingText="Loading more data...">
+		</ion-infinite-scroll-content>
+
+	</ion-infinite-scroll>
+
+</ion-content>

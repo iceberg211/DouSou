@@ -1,0 +1,13 @@
+<ion-head>
+	<ion-navbar>
+		<ion-title>详情</ion-title>
+		<ion-nav swipeBackEnabled="true" [root]="home" (click)="goback()"></ion-nav>
+	</ion-navbar>
+</ion-head>
+<ion-content>
+	<ion-card>
+		<img src={{item.images.large}}>
+		<div class="card-title">{{item.title}}</div>
+		<div class="card-subtitle">{{item.original_title}}</div>
+	</ion-card>
+</ion-content>

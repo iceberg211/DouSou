@@ -1,0 +1,74 @@
+<ion-header>
+	<ion-navbar text>
+		<ion-title>首页</ion-title>
+	</ion-navbar>
+	<ion-searchbar [(ngModel)]="myInput" placeholder="搜索电影,图书,音乐" (click)="onInput(event)"></ion-searchbar>
+	<div >
+		<ion-segment [(ngModel)]="pet">
+			<ion-segment-button value="movie">
+				电影
+			</ion-segment-button>
+			<ion-segment-button value="book" (click)="getBooKList()">
+				图书
+			</ion-segment-button>
+			<ion-segment-button value="music" (click)="get">
+				音乐
+			</ion-segment-button>
+		</ion-segment>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content" [ngSwitch]="pet">
+		<div *ngSwitchDefault>
+			<p center>正在上映的热门电影</p>
+			<ion-list>
+				<ion-item-sliding *ngFor="let item of container">
+					<ion-item>
+						<ion-avatar item-left>
+							<img src="{{item.images.medium}}">
+						</ion-avatar>
+						<h2>{{item.title}}</h2>
+						<h3>{{item.genres}}</h3>
+						<p>{{item.rating.average}}+{{item.directors[0].name}}</p>
+					</ion-item>
+					<ion-item-options side="right">
+						<button (click)="setTop(item)">
+							<!-- <ion-icon name="text"></ion-icon> -->
+							想看
+						</button>
+						<button favorite>
+							<!-- <ion-icon name="call"></ion-icon> -->
+							看过
+						</button>
+					</ion-item-options>
+				</ion-item-sliding>
+			</ion-list>
+		</div>
+		<div *ngSwitchCase="'book'">
+			<p>图书图书</p>
+			<ion-list>
+				<ion-item *ngFor="let item of bookList">
+					<ion-avatar item-left>
+						<img src="{{item.images.medium}}">
+					</ion-avatar>
+					<h2>{{item.subtitle}}</h2>
+					<h3>{{item.author}}</h3>
+					<p>{{item.summary}}</p>
+				</ion-item>
+			</ion-list>
+		</div>
+		<div *ngSwitchCase="'music'">
+			<ion-list>
+				<ion-item *ngFor="let item of musicList">
+					<ion-avatar item-left>
+						<img src="{{item.image}}">
+					</ion-avatar>
+					<h2>专辑名:{{item.attrs.title[0]}}</h2><span>评分{{item.rating.average}}</span>
+					<h3>歌手{{item.title}}</h3>
+					<p>{{item.attrs.tracks[0]}}</p>
+				</ion-item>
+			</ion-list>
+		</div>
+	</div>
+</ion-content>
